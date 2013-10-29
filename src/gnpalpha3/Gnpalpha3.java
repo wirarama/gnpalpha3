@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -25,5 +26,12 @@ public class Gnpalpha3 {
     public static void main(String[] args) throws IOException {
         (new File("log/"+testdate+"")).mkdirs();
         int[][] data = randominput.randomdb(attributeamount,dataamount,50);
+        ArrayList<int[][]> dataplot = new ArrayList<>();
+        int[][] dataplot1 = plot.datasplit(data,0);
+        int[][] dataplot2 = plot.datasplit(data,1);
+        dataplot.add(dataplot1);
+        dataplot.add(dataplot2);
+        String[] label = {"attr1","attr2"};
+        plot.makeplot(dataplot,label,"data","value","data");
     }
 }

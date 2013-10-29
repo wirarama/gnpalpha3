@@ -28,7 +28,6 @@ public class plot {
         p.setKey(JavaPlot.Key.BELOW);
         p.getAxis("x").setLabel(xlabel);
         p.getAxis("y").setLabel(ylabel);
-        int dataamount = 7;
         int k=0;
         boolean fileexport=true;
         for(int i=0;i<data.size();i++){
@@ -38,7 +37,7 @@ public class plot {
             PlotStyle stl = ((AbstractPlot) p.getPlots().get(k)).getPlotStyle();
             stl.setStyle(Style.LINES);
             ImageTerminal png = new ImageTerminal();
-            File file = new File("plot/"+pngname+testdate+".png");
+            File file = new File("log/"+testdate+"/"+pngname+testdate+".png");
             try {
                 file.createNewFile();
                 png.processOutput(new FileInputStream(file));
@@ -58,5 +57,13 @@ public class plot {
             }
             k++;
         }
+    }
+    public static int[][] datasplit(int[][] data,int index){
+        int[][] out = new int[data.length][2];
+        for(int i=0;i<data.length;i++){
+            out[i][0]=i+1;
+            out[i][1]=data[i][index];
+        }
+        return out;
     }
 }
