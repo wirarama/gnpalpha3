@@ -32,6 +32,6 @@ public class Gnpalpha3 {
         dataplot.add(dataplot1);
         dataplot.add(dataplot2);
         String[] label = {"attr1","attr2"};
-        plot.makeplot(dataplot,label,"data","value","data");
+        plot.makeplot(dataplot,label,"value","data","data");
     }
 }

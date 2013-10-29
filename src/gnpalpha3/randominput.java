@@ -29,10 +29,19 @@ public class randominput {
     }
     public static int[] randomrow(int attributeamount){
         int[] data = new int[attributeamount];
+        int[][] range = attrrange(attributeamount);
         for(int i=0;i<attributeamount;i++){
-            data[i] = randomrange(1,10);
+            data[i] = randomrange(range[i][0],range[i][1]);
         }
         return data;
+    }
+    public static int[][] attrrange(int attributeamount){
+        int[][] range = new int[attributeamount][2];
+        for(int i=0;i<attributeamount;i++){
+            range[i][0] = randomrange(1,1000);
+            range[i][1] = range[i][0]+randomrange(1,500);
+        }
+        return range;
     }
     public static int randomrange(int min,int max){
         int randomvalue = min + (int)(Math.random() * ((max - min) + 1));
