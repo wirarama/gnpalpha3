@@ -21,14 +21,8 @@ public class randominput {
         for(int i=0;i<dataamount;i++){
             data[i] = pattern[randomrange(0,(datavariation-1))];
         }
-        try (BufferedWriter out = new BufferedWriter(new FileWriter("log/"+testdate+"/data.csv"))) {
-            for(int i=0;i<dataamount;i++){
-                for(int j=0;j<attributeamount;j++){
-                    out.write(data[i][j]+",");
-                }
-                out.newLine();
-            }
-        }
+        arraycsv(pattern,"pattern.csv");
+        arraycsv(data,"data.csv");
         return data;
     }
     public static int[] randomrow(int attributeamount){
@@ -41,5 +35,15 @@ public class randominput {
     public static int randomrange(int min,int max){
         int randomvalue = min + (int)(Math.random() * ((max - min) + 1));
         return randomvalue;
+    }
+    public static void arraycsv(int[][] data,String filename) throws IOException{
+        try (BufferedWriter out = new BufferedWriter(new FileWriter("log/"+testdate+"/"+filename))) {
+            for(int i=0;i<data.length;i++){
+                for(int j=0;j<data[0].length;j++){
+                    out.write(data[i][j]+",");
+                }
+                out.newLine();
+            }
+        }
     }
 }
