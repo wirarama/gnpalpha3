@@ -3,10 +3,12 @@
  * and open the template in the editor.
  */
 package gnpalpha3;
+
 import static gnpalpha3.Gnpalpha3.testdate;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+
 /**
  *
  * @author test
