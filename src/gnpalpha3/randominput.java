@@ -39,7 +39,7 @@ public class randominput {
         int[][] range = new int[attributeamount][2];
         for(int i=0;i<attributeamount;i++){
             range[i][0] = randomrange(1,1000);
-            range[i][1] = range[i][0]+randomrange(1,500);
+            range[i][1] = range[i][0]+randomrange(1,50);
         }
         return range;
     }

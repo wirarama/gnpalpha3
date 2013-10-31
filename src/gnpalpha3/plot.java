@@ -66,4 +66,23 @@ public class plot {
         }
         return out;
     }
+    public static void datasplitbatch(int[][] data,int limit){
+        ArrayList<int[][]> dataplot;
+        String[] label;
+        int l = 1;
+        for(int i=0;i<data[0].length;i=i+limit){
+            int k = i;
+            dataplot = new ArrayList<>();
+            label = new String[5];
+            LOOP:for(int j=0;j<limit;j++){
+                label[j] = "attr"+(k+1);
+                int[][] dataplot1 = datasplit(data,k);
+                dataplot.add(dataplot1);
+                k++;
+                if(k>=data[0].length) break LOOP;
+            }
+            makeplot(dataplot,label,"data("+l+")","value","data");
+            l++;
+        }
+    }
 }
