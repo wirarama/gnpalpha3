@@ -25,6 +25,6 @@ public class Gnpalpha3 {
     public static void main(String[] args) throws IOException {
         (new File("log/"+testdate+"")).mkdirs();
         int[][] data = randominput.randomdb(attributeamount,dataamount,50);
-        plot.datasplitbatch(data,5);
+        plot.datasplitbatch(data,3);
     }
 }

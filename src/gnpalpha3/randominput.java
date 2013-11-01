@@ -17,19 +17,20 @@ public class randominput {
     public static int[][] randomdb(int attributeamount,int dataamount,int datavariation) throws IOException{
         int[][] data = new int[dataamount][attributeamount];
         int[][] pattern = new int[datavariation][attributeamount];
+        int[][] range = attrrange(attributeamount);
         for(int i=0;i<datavariation;i++){
-            pattern[i] = randomrow(attributeamount);
+            pattern[i] = randomrow(attributeamount,range);
         }
         for(int i=0;i<dataamount;i++){
             data[i] = pattern[randomrange(0,(datavariation-1))];
         }
+        arraycsv(range,"range.csv");
         arraycsv(pattern,"pattern.csv");
         arraycsv(data,"data.csv");
         return data;
     }
-    public static int[] randomrow(int attributeamount){
+    public static int[] randomrow(int attributeamount,int[][] range){
         int[] data = new int[attributeamount];
-        int[][] range = attrrange(attributeamount);
         for(int i=0;i<attributeamount;i++){
             data[i] = randomrange(range[i][0],range[i][1]);
         }
@@ -49,9 +50,9 @@ public class randominput {
     }
     public static void arraycsv(int[][] data,String filename) throws IOException{
         try (BufferedWriter out = new BufferedWriter(new FileWriter("log/"+testdate+"/"+filename))) {
-            for(int i=0;i<data.length;i++){
-                for(int j=0;j<data[0].length;j++){
-                    out.write(data[i][j]+",");
+            for (int[] data1 : data) {
+                for (int j = 0; j<data[0].length; j++) {
+                    out.write(data1[j] + ",");
                 }
                 out.newLine();
             }
