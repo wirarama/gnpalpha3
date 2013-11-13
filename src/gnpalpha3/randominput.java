@@ -24,9 +24,11 @@ public class randominput {
         for(int i=0;i<dataamount;i++){
             data[i] = pattern[randomrange(0,(datavariation-1))];
         }
+        int[] patternresult = patternseeker(pattern,data,pattern[0].length);
         arraycsv(range,"range.csv");
         arraycsv(pattern,"pattern.csv");
         arraycsv(data,"data.csv");
+        arraycsv1(patternresult,"patternresult.log");
         return data;
     }
     public static int[] randomrow(int attributeamount,int[][] range){
@@ -56,6 +58,35 @@ public class randominput {
                 }
                 out.newLine();
             }
+            out.close();
         }
+    }
+    public static void arraycsv1(int[] data,String filename) throws IOException{
+        try (BufferedWriter out = new BufferedWriter(new FileWriter("log/"+testdate+"/"+filename))) {
+            for (int i = 0; i<data.length; i++) {
+                out.write(data[i]+"");
+                out.newLine();
+            }
+            out.close();
+        }
+    }
+    public static int[] patternseeker(int[][] pattern,int[][] data,int limit){
+        int[] out = new int[pattern.length];
+        int[][] check = new int[pattern.length][data.length];
+        for(int i = 0;i<pattern.length;i++){
+            out[i] = 0;
+            for(int j=0;j<data.length;j++){
+                check[i][j] = 0;
+                for(int k=0;k<pattern[0].length;k++){
+                    if(pattern[i][k]==data[j][k]){
+                        check[i][j] += 1;
+                    }
+                }
+                if(check[i][j]==pattern[0].length){
+                    out[i] += 1;
+                }
+            }
+        }
+        return out;
     }
 }

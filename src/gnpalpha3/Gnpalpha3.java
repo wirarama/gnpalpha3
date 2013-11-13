@@ -16,8 +16,8 @@ import java.util.Date;
  */
 
 public class Gnpalpha3 {
-    static final int attributeamount=53;
-    static final int dataamount=1000;
+    static final int attributeamount=56;
+    static final int dataamount=12000;
     static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
     static final Date date = new Date();
     static String testdate = dateFormat.format(date);
@@ -25,6 +25,6 @@ public class Gnpalpha3 {
     public static void main(String[] args) throws IOException {
         (new File("log/"+testdate+"")).mkdirs();
         int[][] data = randominput.randomdb(attributeamount,dataamount,50);
-        plot.datasplitbatch(data,3);
+        //plot.datasplitbatch(data,3);
     }
 }
