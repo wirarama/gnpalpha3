@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author test
  */
 public class randominput {
-    public static int[][] randomdb(int attributeamount,int dataamount,int datavariation) throws IOException{
+    public static int[][] randomdb(int attributeamount,int dataamount,int datavariation,String testdate) throws IOException{
         int[][] data = new int[dataamount][attributeamount];
         int[][] pattern = new int[datavariation][attributeamount];
         int[][] range = attrrange(attributeamount);
@@ -22,10 +22,10 @@ public class randominput {
             data[i] = pattern[randomrange(0,(datavariation-1))];
         }
         int[] patternresult = patternseeker(pattern,data,pattern[0].length);
-        filelog.arraycsv(range,"range.csv");
-        filelog.arraycsv(pattern,"pattern.csv");
-        filelog.arraycsv(data,"data.csv");
-        filelog.patternlog(patternresult,"patternresult.log");
+        filelog.arraycsv(range,"range.csv",testdate);
+        filelog.arraycsv(pattern,"pattern.csv",testdate);
+        filelog.arraycsv(data,"data.csv",testdate);
+        filelog.patternlog(patternresult,"patternresult.log",testdate);
         return data;
     }
     public static int[] randomrow(int attributeamount,int[][] range){

@@ -6,7 +6,6 @@
 
 package gnpalpha3;
 
-import static gnpalpha3.Gnpalpha3.testdate;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +15,7 @@ import java.io.IOException;
  * @author test
  */
 public class filelog {
-    public static void arraycsv(int[][] data,String filename) throws IOException{
+    public static void arraycsv(int[][] data,String filename,String testdate) throws IOException{
         try (BufferedWriter out = new BufferedWriter(new FileWriter("log/"+testdate+"/"+filename))) {
             for (int[] data1 : data) {
                 for (int j = 0; j<data[0].length; j++) {
@@ -27,7 +26,7 @@ public class filelog {
             out.close();
         }
     }
-    public static void arraycsvdouble(double[][] data,String filename) throws IOException{
+    public static void arraycsvdouble(double[][] data,String filename,String testdate) throws IOException{
         try (BufferedWriter out = new BufferedWriter(new FileWriter("log/"+testdate+"/"+filename))) {
             for (double[] data1 : data) {
                 for (int j = 0; j<data[0].length; j++) {
@@ -38,7 +37,7 @@ public class filelog {
             out.close();
         }
     }
-    public static void patternlog(int[] data,String filename) throws IOException{
+    public static void patternlog(int[] data,String filename,String testdate) throws IOException{
         try (BufferedWriter out = new BufferedWriter(new FileWriter("log/"+testdate+"/"+filename))) {
             for (int i = 0; i<data.length; i++) {
                 out.write("pattern : "+data[i]+"");

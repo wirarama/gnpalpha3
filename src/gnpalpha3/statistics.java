@@ -17,13 +17,13 @@ public class statistics {
     double[] data;
     double size;
     
-    public static double[][] getstatistics(int[][] data) throws IOException{
+    public static double[][] getstatistics(int[][] data,String testdate) throws IOException{
         double[][] out = new double[data[0].length][6];
         for(int i=0;i<data[0].length;i++){
             double[] get = getmaxmin(data,i);
             out[i] = get;
         }
-        filelog.arraycsvdouble(out,"statistics.csv");
+        filelog.arraycsvdouble(out,"statistics.csv",testdate);
         return out;
     }
     public static double[] getmaxmin(int[][] data,int attribute){

@@ -4,7 +4,6 @@
  */
 package gnpalpha3;
 
-import static gnpalpha3.Gnpalpha3.testdate;
 import com.panayotis.gnuplot.JavaPlot;
 import com.panayotis.gnuplot.plot.AbstractPlot;
 import com.panayotis.gnuplot.style.PlotStyle;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
  * @author test
  */
 public class plot {
-    public static void makeplot(ArrayList<int[][]> data,String[] label,String pngname,String xlabel,String ylabel){
+    public static void makeplot(ArrayList<int[][]> data,String[] label,String pngname,String xlabel,String ylabel,String testdate){
         JavaPlot p = new JavaPlot();
         p.setTitle(pngname);
         p.setKey(JavaPlot.Key.BELOW);
@@ -66,7 +65,7 @@ public class plot {
         }
         return out;
     }
-    public static void datasplitbatch(int[][] data,int limit){
+    public static void datasplitbatch(int[][] data,int limit,String testdate){
         ArrayList<int[][]> dataplot;
         String[] label;
         int l = 1;
@@ -81,7 +80,7 @@ public class plot {
                 k++;
                 if(k>=data[0].length) break LOOP;
             }
-            makeplot(dataplot,label,"data("+l+")","data","value");
+            makeplot(dataplot,label,"data("+l+")","data","value",testdate);
             l++;
         }
     }
