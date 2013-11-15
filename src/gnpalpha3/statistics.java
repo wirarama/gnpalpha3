@@ -6,6 +6,7 @@
 
 package gnpalpha3;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
@@ -16,14 +17,14 @@ public class statistics {
     double[] data;
     double size;
     
-    public static double[] getstatistics(int[][] data){
-        int attributeamount = data[0].length;
-        double[] stddev = new double[attributeamount];
-        for(int j=0;j<attributeamount;j++){
-            double[] test = getmaxmin(data,j);
-            stddev[j] = test[2];
+    public static double[][] getstatistics(int[][] data) throws IOException{
+        double[][] out = new double[data[0].length][6];
+        for(int i=0;i<data[0].length;i++){
+            double[] get = getmaxmin(data,i);
+            out[i] = get;
         }
-        return stddev;
+        filelog.arraycsvdouble(out,"statistics.csv");
+        return out;
     }
     public static double[] getmaxmin(int[][] data,int attribute){
         double[] out = new double[6];

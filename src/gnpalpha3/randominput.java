@@ -4,9 +4,6 @@
  */
 package gnpalpha3;
 
-import static gnpalpha3.Gnpalpha3.testdate;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -25,10 +22,10 @@ public class randominput {
             data[i] = pattern[randomrange(0,(datavariation-1))];
         }
         int[] patternresult = patternseeker(pattern,data,pattern[0].length);
-        arraycsv(range,"range.csv");
-        arraycsv(pattern,"pattern.csv");
-        arraycsv(data,"data.csv");
-        arraycsv1(patternresult,"patternresult.log");
+        filelog.arraycsv(range,"range.csv");
+        filelog.arraycsv(pattern,"pattern.csv");
+        filelog.arraycsv(data,"data.csv");
+        filelog.patternlog(patternresult,"patternresult.log");
         return data;
     }
     public static int[] randomrow(int attributeamount,int[][] range){
@@ -50,26 +47,7 @@ public class randominput {
         int randomvalue = min + (int)(Math.random() * ((max - min) + 1));
         return randomvalue;
     }
-    public static void arraycsv(int[][] data,String filename) throws IOException{
-        try (BufferedWriter out = new BufferedWriter(new FileWriter("log/"+testdate+"/"+filename))) {
-            for (int[] data1 : data) {
-                for (int j = 0; j<data[0].length; j++) {
-                    out.write(data1[j] + ",");
-                }
-                out.newLine();
-            }
-            out.close();
-        }
-    }
-    public static void arraycsv1(int[] data,String filename) throws IOException{
-        try (BufferedWriter out = new BufferedWriter(new FileWriter("log/"+testdate+"/"+filename))) {
-            for (int i = 0; i<data.length; i++) {
-                out.write(data[i]+"");
-                out.newLine();
-            }
-            out.close();
-        }
-    }
+    
     public static int[] patternseeker(int[][] pattern,int[][] data,int limit){
         int[] out = new int[pattern.length];
         int[][] check = new int[pattern.length][data.length];

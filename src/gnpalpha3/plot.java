@@ -81,7 +81,7 @@ public class plot {
                 k++;
                 if(k>=data[0].length) break LOOP;
             }
-            makeplot(dataplot,label,"data("+l+")","value","data");
+            makeplot(dataplot,label,"data("+l+")","data","value");
             l++;
         }
     }
