@@ -98,7 +98,7 @@ public class gui  extends JFrame{
         (new File("log/"+testdate+"")).mkdirs();
         int attributeamount = Integer.parseInt(txtattribute.getText());
         int dataamount = Integer.parseInt(txtdata.getText());
-        int[][] data = randominput.randomdb(attributeamount,dataamount,50,testdate);
+        int[][] data = randominput.randomdb(attributeamount,dataamount,50,testdate,1000,8,10);
         double[][] stat = statistics.getstatistics(data,testdate);
         if(chkplot.isSelected()==true){
             plot.datasplitbatch(data,5,testdate);
