@@ -46,4 +46,13 @@ public class filelog {
             out.close();
         }
     }
+    public static void stringlog(String[] data,String filename,String testdate) throws IOException{
+        try (BufferedWriter out = new BufferedWriter(new FileWriter("log/"+testdate+"/"+filename))) {
+            for (String data1 : data) {
+                out.write(data1 + "");
+                out.newLine();
+            }
+            out.close();
+        }
+    }
 }
