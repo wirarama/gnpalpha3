@@ -47,8 +47,8 @@ public class statistics {
         }
         double[] attr2 = converttodouble(attr);
         statistics attr1 = new statistics(attr2);
-        out[0] = min;
-        out[1] = max;
+        out[0] = max;
+        out[1] = min;
         out[2] = attr1.getStdDev();
         out[3] = attr1.getMean();
         out[4] = attr1.getVariance();

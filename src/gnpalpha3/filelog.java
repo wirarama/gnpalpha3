@@ -55,4 +55,18 @@ public class filelog {
             out.close();
         }
     }
+    public static void array3csv(int[][][] data,String filename,String testdate) throws IOException{
+        try (BufferedWriter out = new BufferedWriter(new FileWriter("log/"+testdate+"/"+filename))) {
+            for (int[][] data1 : data) {
+                for (int[] data11 : data1) {
+                    for (int k = 0; k<data11.length; k++) {
+                        out.write(data11[k] + "-");
+                    }
+                    out.write(",");
+                }
+                out.newLine();
+            }
+            out.close();
+        }
+    }
 }
