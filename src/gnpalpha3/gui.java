@@ -11,11 +11,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -159,20 +155,14 @@ public class gui  extends JFrame{
     }
     
     public void inputprocess() throws IOException{
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-        Date date = new Date();
-        String testdate = dateFormat.format(date);
-        (new File("log/"+testdate+"")).mkdirs();
-        int attributeamount = Integer.parseInt(txtattribute.getText());
-        int dataamount = Integer.parseInt(txtdata.getText());
-        int cross = Integer.parseInt(txtcross.getText());
-        int mutation = Integer.parseInt(txtmutation.getText());
-        int range = Integer.parseInt(txtrange.getText());
-        int variation = Integer.parseInt(txtvariation.getText());
-        int[][] data = randominput.randomdb(attributeamount,dataamount,variation,testdate,range,cross,mutation);
-        double[][] stat = statistics.getstatistics(data,testdate);
-        if(chkplot.isSelected()==true){
-            plot.datasplitbatch(data,5,testdate);
-        }
+        mainprocess.mainprocess(
+                Integer.parseInt(txtattribute.getText()),
+                Integer.parseInt(txtdata.getText()),
+                Integer.parseInt(txtcross.getText()),
+                Integer.parseInt(txtmutation.getText()),
+                Integer.parseInt(txtrange.getText()),
+                Integer.parseInt(txtvariation.getText()),
+                chkplot.isSelected()
+        );
     }
 }
