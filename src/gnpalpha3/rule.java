@@ -17,10 +17,11 @@ public class rule {
             int ruleamount,
             int attributeamount,
             double[][] stat,
+            int[][] data,
             String testdate
     ) throws IOException{
         int[][][] ruleset = new int[ruleamount][attributeamount][3];
-        int[][][] rangeset = rangeset(attributeamount,stat);
+        int[][][] rangeset = rangeset(attributeamount,stat,data);
         for(int i=0;i<ruleamount;i++){
             ruleset[i] = randomrule(attributeamount,rangeset);
         }
@@ -38,23 +39,35 @@ public class rule {
         }
         return rule;
     }
-    public static int[][][] rangeset(int attributeamount,double[][] stat){
+    public static int[][][] rangeset(int attributeamount,double[][] stat,int[][] data){
         int[][][] range = new int[attributeamount][4][2];
         for(int i=0;i<attributeamount;i++){
-            range[i] = rangegeneratorsub(stat[i][0],stat[i][1]);
+            range[i] = rangegeneratorsub(stat[i][0],stat[i][1],data,i);
         }
         return range;
     }
-    public static int[][] rangegeneratorsub(double max,double min){
-        int[][] subrange = new int[5][2];
+    public static int[][] rangegeneratorsub(double max,double min,int[][] data,int index){
+        int[][] subrange = new int[5][3];
         double deviation = (max-min)/4;
         int j = 0;
         for(double i=min;i<=max;i=i+deviation){
             subrange[j][0] = (int) i;
             subrange[j][1] = (int) (i+deviation);
-            System.out.println(subrange[j][0]+" "+subrange[j][1]);
+            subrange[j][2] = rangelog(subrange[j][0],subrange[j][1],data,index);
             j++;
         }
         return subrange;
     }
+    public static int rangelog(int min,int max,int[][] data,int index){
+        int count = 0;
+        for (int[] data1 : data) {
+            if (data1[index] > min && data1[index] < max) {
+                count=count+1;
+                
+            }
+        }
+        System.out.println(count);
+        return count;
+    }
+    
 }
