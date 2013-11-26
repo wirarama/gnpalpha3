@@ -63,10 +63,8 @@ public class rule {
         for (int[] data1 : data) {
             if (data1[index] > min && data1[index] < max) {
                 count=count+1;
-                
             }
         }
-        System.out.println(count);
         return count;
     }
     
