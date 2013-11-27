@@ -22,11 +22,14 @@ public class rule {
     ) throws IOException{
         int[][][] ruleset = new int[ruleamount][attributeamount][3];
         int[][][] rangeset = rangeset(attributeamount,stat,data);
+        int[] rulecoverage = new int[ruleamount];
         for(int i=0;i<ruleamount;i++){
             ruleset[i] = randomrule(attributeamount,rangeset);
+            rulecoverage[i] = rulecoverage(ruleset[i],data);
         }
         filelog.array3csv(ruleset,"ruleset.csv",testdate);
         filelog.array3csv(rangeset,"rangeset.csv",testdate);
+        filelog.patternlog(rulecoverage,"coverage.log",testdate,"rule");
         return ruleset;
     }
     public static int[][] randomrule(int attributeamount,int[][][] range){
@@ -67,5 +70,19 @@ public class rule {
         }
         return count;
     }
-    
+    public static int rulecoverage(int[][] rule,int[][] data){
+        int count=0;
+        for (int[] data1 : data) {
+            int support=0;
+            for (int j = 0; j<data1.length; j++) {
+                if (data1[j] >= rule[j][0] && data1[j] <= rule[j][1]) {
+                    support=support+1;
+                }
+            }
+            if(support==data1.length){
+                count=count+1;
+            }
+        }
+        return count;
+    }
 }

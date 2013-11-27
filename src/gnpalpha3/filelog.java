@@ -37,10 +37,10 @@ public class filelog {
             out.close();
         }
     }
-    public static void patternlog(int[] data,String filename,String testdate) throws IOException{
+    public static void patternlog(int[] data,String filename,String testdate,String label) throws IOException{
         try (BufferedWriter out = new BufferedWriter(new FileWriter("log/"+testdate+"/"+filename))) {
             for (int i = 0; i<data.length; i++) {
-                out.write("pattern : "+data[i]+"");
+                out.write(label+" "+i+" : "+data[i]+"");
                 out.newLine();
             }
             out.close();

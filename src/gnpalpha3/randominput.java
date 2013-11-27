@@ -33,7 +33,7 @@ public class randominput {
         filelog.arraycsv(range,"range.csv",testdate);
         filelog.arraycsv(pattern,"pattern.csv",testdate);
         filelog.arraycsv(data,"data.csv",testdate);
-        filelog.patternlog(patternresult,"patternresult.log",testdate);
+        filelog.patternlog(patternresult,"patternresult.log",testdate,"pattern");
         return data;
     }
     public static int[] randomrow(
