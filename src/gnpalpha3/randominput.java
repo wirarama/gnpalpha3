@@ -24,7 +24,7 @@ public class randominput {
         int[][] pattern = new int[datavariation][attributeamount];
         int[][] range = attrrange(attributeamount,rangeamount);
         for(int i=0;i<datavariation;i++){
-            pattern[i] = randomrow(attributeamount,range,pattern,crossoverrate,mutationrate);
+            pattern[i] = randomrow(attributeamount,range,pattern,crossoverrate,mutationrate,(i-1));
         }
         for(int i=0;i<dataamount;i++){
             data[i] = pattern[randomrange(0,(datavariation-1))];
@@ -41,18 +41,21 @@ public class randominput {
             int[][] range, 
             int[][] pattern,
             int crossoverrate,
-            int mutationrate
+            int mutationrate,
+            int currentrow
     ){
         int[] data = new int[attributeamount];
         for(int i=0;i<attributeamount;i++){
             data[i] = randomrange(range[i][0],range[i][1]);
         }
+        
         //mutation
         int rand = randomrange(0,mutationrate);
         if(rand==0) data = patternmutation(data);
         //crossover
         rand = randomrange(0,crossoverrate);
-        if(rand==0) data = patterncrossover(data,pattern[randomrange(0,(pattern.length-1))]);
+        if(rand==0) data = patterncrossover(data,pattern[randomrange(0,currentrow)]);
+        
         return data;
     }
     public static int[][] attrrange(int attributeamount,int rangeamount){

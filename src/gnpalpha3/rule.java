@@ -27,9 +27,11 @@ public class rule {
             ruleset[i] = randomrule(attributeamount,rangeset);
             rulecoverage[i] = rulecoverage(ruleset[i],data);
         }
+        int[][] rangelogset = rangelogset(rangeset,data);
         filelog.array3csv(ruleset,"ruleset.csv",testdate);
         filelog.array3csv(rangeset,"rangeset.csv",testdate);
-        filelog.patternlog(rulecoverage,"coverage.log",testdate,"rule");
+        filelog.patternlog(rulecoverage,"rulecoverage.log",testdate,"rule");
+        filelog.arraycsv(rangelogset,"rangecoverage.csv",testdate);
         return ruleset;
     }
     public static int[][] randomrule(int attributeamount,int[][][] range){
@@ -50,16 +52,24 @@ public class rule {
         return range;
     }
     public static int[][] rangegeneratorsub(double max,double min,int[][] data,int index){
-        int[][] subrange = new int[5][3];
+        int[][] subrange = new int[4][2];
         double deviation = (max-min)/4;
         int j = 0;
-        for(double i=min;i<=max;i=i+deviation){
+        for(double i=min;i<max;i=i+deviation){
             subrange[j][0] = (int) i;
             subrange[j][1] = (int) (i+deviation);
-            subrange[j][2] = rangelog(subrange[j][0],subrange[j][1],data,index);
             j++;
         }
         return subrange;
+    }
+    public static int[][] rangelogset(int[][][] rangeset,int[][] data){
+        int[][] rangelogset = new int[rangeset.length][4];
+        for(int i=0;i<rangeset.length;i++){
+            for(int j=0;j<4;j++){
+                rangelogset[i][j] = rangelog(rangeset[i][j][0],rangeset[i][j][1],data,i);
+            }
+        }
+        return rangelogset;
     }
     public static int rangelog(int min,int max,int[][] data,int index){
         int count = 0;
