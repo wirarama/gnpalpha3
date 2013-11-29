@@ -9,7 +9,6 @@ package gnpalpha3;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -33,9 +32,10 @@ public class mainprocess {
         (new File("log/"+testdate+"")).mkdirs();
         int[][] data = randominput.randomdb(attributeamount,dataamount,variation,testdate,range,cross,mutation);
         double[][] stat = statistics.getstatistics(data,testdate);
-        int[][][] ruleset = rule.ruleset(500,attributeamount,stat,data,testdate);
+        int[][][] ruleset = rule.ruleset(10000,attributeamount,stat,data,testdate);
         if(isplot==true){
             plot.datasplitbatch(data,5,testdate);
         }
+        Runtime.getRuntime().exec("nemo /home/test/NetBeansProjects/gnpalpha3/log/"+testdate+"");
     }
 }

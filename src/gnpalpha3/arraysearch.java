@@ -28,5 +28,4 @@ public class arraysearch {
         }
         return sum+1;
     }
-    
 }

@@ -100,7 +100,7 @@ public class gui  extends JFrame{
             public void actionPerformed(ActionEvent ae){
                 try {
                     inputprocess();
-                    JOptionPane.showMessageDialog(null,"finished");
+                    //JOptionPane.showMessageDialog(null,"finished");
                 } catch (IOException ex) {
                     Logger.getLogger(gui.class.getName()).log(Level.SEVERE, null, ex);
                 }

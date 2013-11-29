@@ -13,6 +13,10 @@ import java.io.IOException;
  * @author test
  */
 public class rule {
+    static int[] added;
+    static int addedindex = 0;
+    static int[] addedrule;
+    static int addedindexrule = 0;
     public static int[][][] ruleset(
             int ruleamount,
             int attributeamount,
@@ -24,6 +28,8 @@ public class rule {
         int[][][] rangeset = rangeset(attributeamount,stat,data);
         int[] rulecoverage = new int[ruleamount];
         for(int i=0;i<ruleamount;i++){
+            addedrule = new int[data.length];
+            addedindexrule = 0;
             ruleset[i] = randomrule(attributeamount,rangeset);
             rulecoverage[i] = rulecoverage(ruleset[i],data);
         }
@@ -63,34 +69,47 @@ public class rule {
         return subrange;
     }
     public static int[][] rangelogset(int[][][] rangeset,int[][] data){
-        int[][] rangelogset = new int[rangeset.length][4];
+        int[][] rangelogset = new int[rangeset.length][5];
         for(int i=0;i<rangeset.length;i++){
+            int total = 0;
+            added = new int[data.length];
+            addedindex = 0;
             for(int j=0;j<4;j++){
                 rangelogset[i][j] = rangelog(rangeset[i][j][0],rangeset[i][j][1],data,i);
+                total = total+rangelogset[i][j];
             }
+            rangelogset[i][4] = total;
         }
         return rangelogset;
     }
     public static int rangelog(int min,int max,int[][] data,int index){
         int count = 0;
-        for (int[] data1 : data) {
-            if (data1[index] > min && data1[index] < max) {
-                count=count+1;
+        for (int i=0;i<data.length;i++) {
+            if (data[i][index] >= min && data[i][index] <= max) {
+                if(arraysearch.inarray(added,i)==false){
+                    added[addedindex]=i;
+                    count=count+1;
+                    addedindex=addedindex+1;
+                }
             }
         }
         return count;
     }
     public static int rulecoverage(int[][] rule,int[][] data){
         int count=0;
-        for (int[] data1 : data) {
+        for (int i=0;i<data.length;i++) {
             int support=0;
-            for (int j = 0; j<data1.length; j++) {
-                if (data1[j] >= rule[j][0] && data1[j] <= rule[j][1]) {
+            for (int j = 0; j<data[0].length; j++) {
+                if (data[i][j] >= rule[j][0] && data[i][j] <= rule[j][1]) {
                     support=support+1;
                 }
             }
-            if(support==data1.length){
-                count=count+1;
+            if(support==data[0].length){
+                if(arraysearch.inarray(addedrule,i)==false){
+                    addedrule[addedindexrule]=i;
+                    count=count+1;
+                    addedindexrule=addedindexrule+1;
+                }
             }
         }
         return count;
