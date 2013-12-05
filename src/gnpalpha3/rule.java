@@ -17,6 +17,8 @@ public class rule {
     static int addedindex = 0;
     static int[] addedrule;
     static int addedindexrule = 0;
+    static int totalcoverage = 0;
+    static int[] totalcoveragelog;
     public static int[][][] ruleset(
             int ruleamount,
             int attributeamount,
@@ -27,16 +29,20 @@ public class rule {
         int[][][] ruleset = new int[ruleamount][attributeamount][3];
         int[][][] rangeset = rangeset(attributeamount,stat,data);
         int[] rulecoverage = new int[ruleamount];
+        totalcoveragelog = new int[ruleamount];
+        addedrule = new int[data.length];
+        addedindexrule = 0;
         for(int i=0;i<ruleamount;i++){
-            addedrule = new int[data.length];
-            addedindexrule = 0;
             ruleset[i] = randomrule(attributeamount,rangeset);
             rulecoverage[i] = rulecoverage(ruleset[i],data);
+            totalcoverage = totalcoverage+rulecoverage[i];
+            totalcoveragelog[i] = totalcoverage;
         }
         int[][] rangelogset = rangelogset(rangeset,data);
         filelog.array3csv(ruleset,"ruleset.csv",testdate);
         filelog.array3csv(rangeset,"rangeset.csv",testdate);
         filelog.patternlog(rulecoverage,"rulecoverage.log",testdate,"rule");
+        filelog.patternlog(totalcoveragelog,"rulecoveragesum.log",testdate,"covered");
         filelog.arraycsv(rangelogset,"rangecoverage.csv",testdate);
         return ruleset;
     }

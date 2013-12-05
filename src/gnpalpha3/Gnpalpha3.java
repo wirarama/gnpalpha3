@@ -14,6 +14,7 @@ import java.io.IOException;
 public class Gnpalpha3 {
     
     public static void main(String[] args) throws IOException {
+        
         gui mygui = new gui();
     }
 }

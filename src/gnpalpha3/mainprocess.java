@@ -32,10 +32,11 @@ public class mainprocess {
         (new File("log/"+testdate+"")).mkdirs();
         int[][] data = randominput.randomdb(attributeamount,dataamount,variation,testdate,range,cross,mutation);
         double[][] stat = statistics.getstatistics(data,testdate);
-        int[][][] ruleset = rule.ruleset(10000,attributeamount,stat,data,testdate);
+        int[][][] ruleset = rule.ruleset(100000,attributeamount,stat,data,testdate);
         if(isplot==true){
             plot.datasplitbatch(data,5,testdate);
         }
-        Runtime.getRuntime().exec("nemo /home/test/NetBeansProjects/gnpalpha3/log/"+testdate+"");
+        System.out.println(System.getProperty("os.name"));
+        Runtime.getRuntime().exec("caja /home/wirarama/NetBeansProjects/gnpalpha3/log/"+testdate+"");
     }
 }
