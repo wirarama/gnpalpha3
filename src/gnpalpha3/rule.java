@@ -14,10 +14,10 @@ import java.io.IOException;
  */
 public class rule {
     static int[] added;
-    static int addedindex = 0;
+    static int addedindex;
     static int[] addedrule;
-    static int addedindexrule = 0;
-    static int totalcoverage = 0;
+    static int addedindexrule;
+    static int totalcoverage;
     static int[] totalcoveragelog;
     public static int[][][] ruleset(
             int ruleamount,
@@ -26,6 +26,9 @@ public class rule {
             int[][] data,
             String testdate
     ) throws IOException{
+        addedindex = 0;
+        addedindexrule = 0;
+        totalcoverage = 0;
         int[][][] ruleset = new int[ruleamount][attributeamount][3];
         int[][][] rangeset = rangeset(attributeamount,stat,data);
         int[] rulecoverage = new int[ruleamount];
@@ -39,7 +42,7 @@ public class rule {
             totalcoverage = totalcoverage+rulecoverage[i];
             totalcoveragelog[i] = totalcoverage;
             totalrule=i;
-            if(totalcoverage==(data.length-1)) break;
+            if(totalcoverage>=(data.length-1)) break;
         }
         totalrule+=1;
         ruleset = arraysearch.cleanarray3(ruleset,totalrule);
