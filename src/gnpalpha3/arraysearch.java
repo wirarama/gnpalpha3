@@ -28,4 +28,19 @@ public class arraysearch {
         }
         return sum+1;
     }
+    public static int[][] cleanarray(int[][] data,int length){
+        int[][] newdata = new int[length][data[0].length];
+        System.arraycopy(data, 0, newdata, 0, length);
+        return newdata;
+    }
+    public static int[][][] cleanarray3(int[][][] data,int length){
+        int[][][] newdata = new int[length][data[0].length][data[0][0].length];
+        System.arraycopy(data, 0, newdata, 0, length);
+        return newdata;
+    }
+    public static int[] cleanarray1(int[] data,int length){
+        int[] newdata = new int[length];
+        System.arraycopy(data, 0, newdata, 0, length);
+        return newdata;
+    }
 }

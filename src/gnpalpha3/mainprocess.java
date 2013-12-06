@@ -32,7 +32,8 @@ public class mainprocess {
         (new File("log/"+testdate+"")).mkdirs();
         int[][] data = randominput.randomdb(attributeamount,dataamount,variation,testdate,range,cross,mutation);
         double[][] stat = statistics.getstatistics(data,testdate);
-        int[][][] ruleset = rule.ruleset(100000,attributeamount,stat,data,testdate);
+        int ruleamount = attributeamount*1000000;
+        int[][][] ruleset = rule.ruleset(ruleamount,attributeamount,stat,data,testdate);
         if(isplot==true){
             plot.datasplitbatch(data,5,testdate);
         }

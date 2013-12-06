@@ -32,12 +32,19 @@ public class rule {
         totalcoveragelog = new int[ruleamount];
         addedrule = new int[data.length];
         addedindexrule = 0;
+        int totalrule=0;
         for(int i=0;i<ruleamount;i++){
             ruleset[i] = randomrule(attributeamount,rangeset);
             rulecoverage[i] = rulecoverage(ruleset[i],data);
             totalcoverage = totalcoverage+rulecoverage[i];
             totalcoveragelog[i] = totalcoverage;
+            totalrule=i;
+            if(totalcoverage==(data.length-1)) break;
         }
+        totalrule+=1;
+        ruleset = arraysearch.cleanarray3(ruleset,totalrule);
+        rulecoverage = arraysearch.cleanarray1(rulecoverage,totalrule);
+        totalcoveragelog = arraysearch.cleanarray1(totalcoveragelog,totalrule);
         int[][] rangelogset = rangelogset(rangeset,data);
         filelog.array3csv(ruleset,"ruleset.csv",testdate);
         filelog.array3csv(rangeset,"rangeset.csv",testdate);
