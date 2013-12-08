@@ -11,20 +11,24 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 
 /**
  *
  * @author test
  */
-public class gui  extends JFrame{
+public class gui extends JFrame{
     JLabel lbattribute = new JLabel();
     JLabel lbdata = new JLabel();
     JLabel lbcross = new JLabel();
@@ -44,6 +48,26 @@ public class gui  extends JFrame{
     static int rowheight = 20;
     static int rowmargin = 10;
     static int labelwidth = 150;
+    MyTask process = new MyTask();
+    
+    class MyTask extends SwingWorker {
+        @Override
+        protected Object doInBackground() throws Exception {
+            btn.setEnabled(false);
+            Integer result = new Integer(0);
+            mainprocess.mainprocess(
+                    Integer.parseInt(txtattribute.getText()),
+                    Integer.parseInt(txtdata.getText()),
+                    Integer.parseInt(txtcross.getText()),
+                    Integer.parseInt(txtmutation.getText()),
+                    Integer.parseInt(txtrange.getText()),
+                    Integer.parseInt(txtvariation.getText()),
+                    chkplot.isSelected()
+            );
+            btn.setEnabled(true);
+            return result;
+        }
+    }
     
     public gui(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,12 +121,7 @@ public class gui  extends JFrame{
         btn.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae){
-                try {
-                    inputprocess();
-                    //JOptionPane.showMessageDialog(null,"finished");
-                } catch (IOException ex) {
-                    Logger.getLogger(gui.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                process.execute();
             }
         });
         this.getContentPane().add(lbattribute,null);
@@ -151,17 +170,5 @@ public class gui  extends JFrame{
             out = new Rectangle((leftmargin+labelwidth),top,width,rowheight);
         }
         return out;
-    }
-    
-    public void inputprocess() throws IOException{
-        mainprocess.mainprocess(
-                Integer.parseInt(txtattribute.getText()),
-                Integer.parseInt(txtdata.getText()),
-                Integer.parseInt(txtcross.getText()),
-                Integer.parseInt(txtmutation.getText()),
-                Integer.parseInt(txtrange.getText()),
-                Integer.parseInt(txtvariation.getText()),
-                chkplot.isSelected()
-        );
     }
 }
