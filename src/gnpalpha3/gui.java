@@ -11,16 +11,10 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 
@@ -43,7 +37,7 @@ public class gui extends JFrame{
     JTextField txtrange = new JTextField();
     JTextField txtvariation = new JTextField();
     JCheckBox chkplot = new JCheckBox("Export Plot as PNG");
-    JButton btn = new JButton("Process");
+    static JButton btn = new JButton("Process");
     static int leftmargin = 35;
     static int rowheight = 20;
     static int rowmargin = 10;
@@ -65,6 +59,7 @@ public class gui extends JFrame{
                     chkplot.isSelected()
             );
             btn.setEnabled(true);
+            btn.setText("Process");
             return result;
         }
     }
@@ -79,7 +74,7 @@ public class gui extends JFrame{
         
         txtattribute.setRequestFocusEnabled(true);
         txtattribute.setBounds(rowfield(1,60));
-        txtattribute.setText("50");
+        txtattribute.setText("7");
         
         lbdata.setText("Data : ");
         lbdata.setBounds(rowlabel(2));
@@ -116,7 +111,7 @@ public class gui extends JFrame{
         
         chkplot.setBounds(rowfield(7,180));
         
-        btn.setBounds(rowfield(8,120));
+        btn.setBounds(rowfield(8,180));
         
         btn.addActionListener(new ActionListener(){
             @Override

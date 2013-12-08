@@ -7,7 +7,7 @@
 package gnpalpha3;
 
 import java.io.IOException;
-
+import static gnpalpha3.gui.btn;
 /**
  *
  * @author test
@@ -41,6 +41,9 @@ public class rule {
             rulecoverage[i] = rulecoverage(ruleset[i],data);
             totalcoverage = totalcoverage+rulecoverage[i];
             totalcoveragelog[i] = totalcoverage;
+            double percentpre = ((double)totalcoverage/(double)data.length);
+            int percent = (int)(percentpre*100);
+            btn.setText(""+totalcoverage+"("+percent+"%)");
             totalrule=i;
             if(totalcoverage>=(data.length-1)) break;
         }
