@@ -43,7 +43,7 @@ public class rule {
             totalcoveragelog[i] = totalcoverage;
             double percentpre = ((double)totalcoverage/(double)data.length);
             int percent = (int)(percentpre*100);
-            btn.setText(""+totalcoverage+"("+percent+"%)");
+            btn.setText("["+i+"]"+totalcoverage+"("+percent+"%)");
             totalrule=i;
             if(totalcoverage>=(data.length-1)) break;
         }
