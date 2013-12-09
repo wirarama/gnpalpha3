@@ -57,6 +57,34 @@ public class plot {
             k++;
         }
     }
+    public static void makeplot1(int[][] data,String label,String pngname,String xlabel,String ylabel,String testdate){
+        JavaPlot p = new JavaPlot();
+        p.setTitle(pngname);
+        p.setKey(JavaPlot.Key.BELOW);
+        p.getAxis("x").setLabel(xlabel);
+        p.getAxis("y").setLabel(ylabel);
+        p.addPlot(data);
+        ((AbstractPlot) p.getPlots().get(0)).setTitle(label);
+        PlotStyle stl = ((AbstractPlot) p.getPlots().get(0)).getPlotStyle();
+        stl.setStyle(Style.LINES);
+        ImageTerminal png = new ImageTerminal();
+        File file = new File("log/"+testdate+"/"+pngname+testdate+".png");
+        try {
+            file.createNewFile();
+            png.processOutput(new FileInputStream(file));
+        } catch (FileNotFoundException ex) {
+            System.err.print(ex);
+        } catch (IOException ex) {
+            System.err.print(ex);
+        }
+        p.setTerminal(png);
+        p.plot();
+        try {
+            ImageIO.write(png.getImage(), "png", file);
+        } catch (IOException ex) {
+            System.err.print(ex);
+        }
+    }
     public static int[][] datasplit(int[][] data,int index){
         int[][] out = new int[data.length][2];
         for(int i=0;i<data.length;i++){
@@ -78,10 +106,24 @@ public class plot {
                 int[][] dataplot1 = datasplit(data,k);
                 dataplot.add(dataplot1);
                 k++;
-                if(k>=data[0].length) break LOOP;
+                if(k>=data[0].length) break;
             }
             makeplot(dataplot,label,"data("+l+")","data","value",testdate);
             l++;
         }
+    }
+    public static void datarangeset(int[][] data,String testdate){
+        ArrayList<int[][]> dataplot = new ArrayList<>();
+        String[] label = new String[data.length];
+        for(int i=0;i<data.length;i++){
+            int[][] data1 = new int[data[0].length][2];
+            for(int j=0;j<data[0].length;j++){
+                data1[j][0] = j;
+                data1[j][1] = data[i][j];
+            }
+            label[i] = "attr "+i;
+            dataplot.add(data1);
+        }
+        makeplot(dataplot,label,"rangecoverage","data","value",testdate);
     }
 }

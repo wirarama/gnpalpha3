@@ -37,6 +37,6 @@ public class mainprocess {
         if(isplot==true){
             plot.datasplitbatch(data,5,testdate);
         }
-        Runtime.getRuntime().exec("nemo /home/wirarama/NetbeanProject/gnpalpha3/log/"+testdate+"");
+        Runtime.getRuntime().exec("caja /home/wirarama/NetBeansProjects/gnpalpha3/log/"+testdate+"");
     }
 }

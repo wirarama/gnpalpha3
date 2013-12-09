@@ -19,6 +19,7 @@ public class rule {
     static int addedindexrule;
     static int totalcoverage;
     static int[] totalcoveragelog;
+    static int[][] totalcoveragelogplot;
     public static int[][][] ruleset(
             int ruleamount,
             int attributeamount,
@@ -33,6 +34,7 @@ public class rule {
         int[][][] rangeset = rangeset(attributeamount,stat,data);
         int[] rulecoverage = new int[ruleamount];
         totalcoveragelog = new int[ruleamount];
+        totalcoveragelogplot = new int[ruleamount][2];
         addedrule = new int[data.length];
         addedindexrule = 0;
         int totalrule=0;
@@ -41,6 +43,8 @@ public class rule {
             rulecoverage[i] = rulecoverage(ruleset[i],data);
             totalcoverage = totalcoverage+rulecoverage[i];
             totalcoveragelog[i] = totalcoverage;
+            totalcoveragelogplot[i][0] = i;
+            totalcoveragelogplot[i][1] = totalcoverage;
             double percentpre = ((double)totalcoverage/(double)data.length);
             int percent = (int)(percentpre*100);
             btn.setText("["+i+"]"+totalcoverage+"("+percent+"%)");
@@ -51,12 +55,15 @@ public class rule {
         ruleset = arraysearch.cleanarray3(ruleset,totalrule);
         rulecoverage = arraysearch.cleanarray1(rulecoverage,totalrule);
         totalcoveragelog = arraysearch.cleanarray1(totalcoveragelog,totalrule);
+        totalcoveragelogplot = arraysearch.cleanarray(totalcoveragelogplot,totalrule);
         int[][] rangelogset = rangelogset(rangeset,data);
         filelog.array3csv(ruleset,"ruleset.csv",testdate);
         filelog.array3csv(rangeset,"rangeset.csv",testdate);
         filelog.patternlog(rulecoverage,"rulecoverage.log",testdate,"rule");
         filelog.patternlog(totalcoveragelog,"rulecoveragesum.log",testdate,"covered");
         filelog.arraycsv(rangelogset,"rangecoverage.csv",testdate);
+        plot.makeplot1(totalcoveragelogplot,"coverage","coverage","rule amount","coverage",testdate);
+        plot.datarangeset(rangelogset,testdate);
         return ruleset;
     }
     public static int[][] randomrule(int attributeamount,int[][][] range){
@@ -88,16 +95,16 @@ public class rule {
         return subrange;
     }
     public static int[][] rangelogset(int[][][] rangeset,int[][] data){
-        int[][] rangelogset = new int[rangeset.length][5];
+        int[][] rangelogset = new int[rangeset.length][4];
         for(int i=0;i<rangeset.length;i++){
             int total = 0;
             added = new int[data.length];
             addedindex = 0;
             for(int j=0;j<4;j++){
                 rangelogset[i][j] = rangelog(rangeset[i][j][0],rangeset[i][j][1],data,i);
-                total = total+rangelogset[i][j];
+                //total = total+rangelogset[i][j];
             }
-            rangelogset[i][4] = total;
+            //rangelogset[i][4] = total;
         }
         return rangelogset;
     }
