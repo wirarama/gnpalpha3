@@ -17,9 +17,10 @@ public class rule {
     static int addedindex;
     static int[] addedrule;
     static int addedindexrule;
+    static int[][][] affectedrule;
+    static int[] affectedrulecoverage;
     static int totalcoverage;
     static int[] totalcoveragelog;
-    static int[][] totalcoveragelogplot;
     public static int[][][] ruleset(
             int ruleamount,
             int attributeamount,
@@ -31,20 +32,25 @@ public class rule {
         addedindexrule = 0;
         totalcoverage = 0;
         int[][][] ruleset = new int[ruleamount][attributeamount][3];
+        affectedrule = new int[ruleamount][attributeamount][3];
+        affectedrulecoverage = new int[ruleamount];
         int[][][] rangeset = rangeset(attributeamount,stat,data);
         int[] rulecoverage = new int[ruleamount];
         totalcoveragelog = new int[ruleamount];
-        totalcoveragelogplot = new int[ruleamount][2];
         addedrule = new int[data.length];
         addedindexrule = 0;
         int totalrule=0;
+        int j=0;
         for(int i=0;i<ruleamount;i++){
             ruleset[i] = randomrule(attributeamount,rangeset);
             rulecoverage[i] = rulecoverage(ruleset[i],data);
+            if(rulecoverage[i]!=0){
+                affectedrule[i] = ruleset[i];
+                affectedrulecoverage[i] = rulecoverage[i];
+                j=j+1;
+            }
             totalcoverage = totalcoverage+rulecoverage[i];
             totalcoveragelog[i] = totalcoverage;
-            totalcoveragelogplot[i][0] = i;
-            totalcoveragelogplot[i][1] = totalcoverage;
             double percentpre = ((double)totalcoverage/(double)data.length);
             int percent = (int)(percentpre*100);
             btn.setText("["+i+"]"+totalcoverage+"("+percent+"%)");
@@ -52,18 +58,23 @@ public class rule {
             if(totalcoverage>=(data.length-1)) break;
         }
         totalrule+=1;
+        j++;
         ruleset = arraysearch.cleanarray3(ruleset,totalrule);
+        affectedrule = arraysearch.cleanarray3(affectedrule,j);
+        affectedrulecoverage = arraysearch.cleanarray1(affectedrulecoverage,j);
         rulecoverage = arraysearch.cleanarray1(rulecoverage,totalrule);
         totalcoveragelog = arraysearch.cleanarray1(totalcoveragelog,totalrule);
-        totalcoveragelogplot = arraysearch.cleanarray(totalcoveragelogplot,totalrule);
         int[][] rangelogset = rangelogset(rangeset,data);
-        filelog.array3csv(ruleset,"ruleset.csv",testdate);
-        filelog.array3csv(rangeset,"rangeset.csv",testdate);
-        filelog.patternlog(rulecoverage,"rulecoverage.log",testdate,"rule");
-        filelog.patternlog(totalcoveragelog,"rulecoveragesum.log",testdate,"covered");
-        filelog.arraycsv(rangelogset,"rangecoverage.csv",testdate);
-        plot.makeplot1(totalcoveragelogplot,"coverage","coverage","rule amount","coverage",testdate);
+        filelog.array3csv(ruleset,"1.ruleset.csv",testdate);
+        filelog.array3csv(rangeset,"2.rangeset.csv",testdate);
+        filelog.patternlog(rulecoverage,"3.rulecoverage.log",testdate,"rule");
+        filelog.patternlog(totalcoveragelog,"4.rulecoveragesum.log",testdate,"covered");
+        filelog.arraycsv(rangelogset,"5.rangecoverage.csv",testdate);
+        filelog.array3csv(affectedrule,"6.affectedrule.csv",testdate);
+        filelog.patternlog(affectedrulecoverage,"7.affectedrulecoverage.csv",testdate,"affected");
+        plot.makeplot1(plot.plotstep(totalcoveragelog),"coverage","coverage","rule amount","coverage",testdate);
         plot.datarangeset(rangelogset,testdate);
+        plot.makeplot1(plot.plotstep(affectedrulecoverage),"coverage","affectedcoverage","rule index","coverage",testdate);
         return ruleset;
     }
     public static int[][] randomrule(int attributeamount,int[][][] range){

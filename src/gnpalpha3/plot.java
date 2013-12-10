@@ -122,12 +122,20 @@ public class plot {
         for(int i=0;i<data.length;i++){
             int[][] data1 = new int[data[0].length][2];
             for(int j=0;j<data[0].length;j++){
-                data1[j][0] = j;
+                data1[j][0] = j+1;
                 data1[j][1] = data[i][j];
             }
             label[i] = "attr "+i;
             dataplot.add(data1);
         }
         makeplot(dataplot,label,"rangecoverage","range index","value",testdate);
+    }
+    public static int[][] plotstep(int[] data){
+        int[][] out = new int[data.length][2];
+        for(int i=0;i<data.length;i++){
+            out[i][0] = i;
+            out[i][1] = data[i];
+        }
+        return out;
     }
 }

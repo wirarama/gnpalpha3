@@ -30,10 +30,10 @@ public class randominput {
             data[i] = pattern[randomrange(0,(datavariation-1))];
         }
         int[] patternresult = patternseeker(pattern,data,pattern[0].length);
-        filelog.arraycsv(range,"range.csv",testdate);
-        filelog.arraycsv(pattern,"pattern.csv",testdate);
-        filelog.arraycsv(data,"data.csv",testdate);
-        filelog.patternlog(patternresult,"patternresult.log",testdate,"pattern");
+        filelog.arraycsv(range,"0.1.range.csv",testdate);
+        filelog.arraycsv(pattern,"0.2.pattern.csv",testdate);
+        filelog.arraycsv(data,"0.3.data.csv",testdate);
+        filelog.patternlog(patternresult,"0.4.patternresult.log",testdate,"pattern");
         return data;
     }
     public static int[] randomrow(
