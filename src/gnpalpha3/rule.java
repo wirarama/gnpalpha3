@@ -45,8 +45,8 @@ public class rule {
             ruleset[i] = randomrule(attributeamount,rangeset);
             rulecoverage[i] = rulecoverage(ruleset[i],data);
             if(rulecoverage[i]!=0){
-                affectedrule[i] = ruleset[i];
-                affectedrulecoverage[i] = rulecoverage[i];
+                affectedrule[j] = ruleset[i];
+                affectedrulecoverage[j] = rulecoverage[i];
                 j=j+1;
             }
             totalcoverage = totalcoverage+rulecoverage[i];
@@ -58,7 +58,6 @@ public class rule {
             if(totalcoverage>=(data.length-1)) break;
         }
         totalrule+=1;
-        j++;
         ruleset = arraysearch.cleanarray3(ruleset,totalrule);
         affectedrule = arraysearch.cleanarray3(affectedrule,j);
         affectedrulecoverage = arraysearch.cleanarray1(affectedrulecoverage,j);
@@ -71,7 +70,7 @@ public class rule {
         filelog.patternlog(totalcoveragelog,"4.rulecoveragesum.log",testdate,"covered");
         filelog.arraycsv(rangelogset,"5.rangecoverage.csv",testdate);
         filelog.array3csv(affectedrule,"6.affectedrule.csv",testdate);
-        filelog.patternlog(affectedrulecoverage,"7.affectedrulecoverage.csv",testdate,"affected");
+        filelog.patternlog(affectedrulecoverage,"7.affectedrulecoverage.log",testdate,"affected");
         plot.makeplot1(plot.plotstep(totalcoveragelog),"coverage","coverage","rule amount","coverage",testdate);
         plot.datarangeset(rangelogset,testdate);
         plot.makeplot1(plot.plotstep(affectedrulecoverage),"coverage","affectedcoverage","rule index","coverage",testdate);
