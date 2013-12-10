@@ -34,7 +34,11 @@ public class plot {
             p.addPlot(data1);
             ((AbstractPlot) p.getPlots().get(k)).setTitle(label[k]);
             PlotStyle stl = ((AbstractPlot) p.getPlots().get(k)).getPlotStyle();
-            stl.setStyle(Style.LINES);
+            if("rangecoverage".equals(pngname)){
+                stl.setStyle(Style.LINESPOINTS);
+            }else{
+                stl.setStyle(Style.LINES);
+            }
             ImageTerminal png = new ImageTerminal();
             File file = new File("log/"+testdate+"/"+pngname+testdate+".png");
             try {
@@ -124,6 +128,6 @@ public class plot {
             label[i] = "attr "+i;
             dataplot.add(data1);
         }
-        makeplot(dataplot,label,"rangecoverage","data","value",testdate);
+        makeplot(dataplot,label,"rangecoverage","range index","value",testdate);
     }
 }
