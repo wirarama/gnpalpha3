@@ -35,7 +35,7 @@ public class mainprocess {
         int ruleamount = 1000000;
         int[][][] ruleset = rule.ruleset(ruleamount,attributeamount,stat,data,testdate);
         if(isplot==true){
-            plot.datasplitbatch(data,5,testdate);
+            plot.datasplitbatch(data,2,testdate);
         }
         Runtime.getRuntime().exec("caja /home/wirarama/NetBeansProjects/gnpalpha3/log/"+testdate+"");
     }

@@ -74,7 +74,7 @@ public class gui extends JFrame{
         
         txtattribute.setRequestFocusEnabled(true);
         txtattribute.setBounds(rowfield(1,60));
-        txtattribute.setText("7");
+        txtattribute.setText("8");
         
         lbdata.setText("Data : ");
         lbdata.setBounds(rowlabel(2));
