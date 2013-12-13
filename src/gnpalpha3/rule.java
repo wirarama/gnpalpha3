@@ -74,7 +74,7 @@ public class rule {
         plot.makeplot1(plot.plotstep(totalcoveragelog),"coverage","coverage","rule amount","coverage",testdate);
         plot.datarangeset(rangelogset,testdate);
         plot.makeplot1(plot.plotstep(affectedrulecoverage),"coverage","affectedcoverage","rule index","coverage",testdate);
-        return ruleset;
+        return affectedrule;
     }
     public static int[][] randomrule(int attributeamount,int[][][] range){
         int[][] rule = new int[attributeamount][3];

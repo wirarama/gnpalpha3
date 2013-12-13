@@ -38,5 +38,7 @@ public class mainprocess {
             plot.datasplitbatch(data,2,testdate);
         }
         Runtime.getRuntime().exec("caja /home/wirarama/NetBeansProjects/gnpalpha3/log/"+testdate+"");
+        knapsack.gnpknapsack(ruleset.length,testdate);
+        System.exit(1);
     }
 }

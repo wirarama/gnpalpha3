@@ -9,30 +9,34 @@ package gnpalpha3;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  *
  * @author wirarama
  */
 public class knapsack {
-    static final int N=60;
-    static int[] profit = new int[N+1];
-    static int[] weight = new int[N+1];
-    static int[][] left = new int[N+1][2];
-    static int[] W1 = {100,400,200,320,400,200,300,600};
-    static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    static final Date date = new Date();
-    static String testdate = dateFormat.format(date);
+    static int N;
+    static int[] profit;
+    static int[] weight;
+    static int[][] left;
+    static int[] W1 = {200,100,200,300,400};
+    static String testdate;
+    
+    public static void gnpknapsack(int num,String date) throws IOException{
+        testdate = date;
+        N = num;
+        profit = new int[N+1];
+        weight = new int[N+1];
+        left = new int[N+1][2];
+        for (int n = 1; n <= N; n++) {
+            profit[n] = randomrange(1,10);
+            weight[n] = randomrange(1,5);
+        }
+        knapsack();
+    }
     
     public static void knapsack() throws IOException{
-        for (int n = 1; n <= N; n++) {
-            profit[n] = randomrange(1,100);
-            weight[n] = randomrange(1,100);
-        }
-        try (BufferedWriter out = new BufferedWriter(new FileWriter("log/knapsack"+testdate+".log"))) {
+        try (BufferedWriter out = new BufferedWriter(new FileWriter("log/"+testdate+"/knapsack"+testdate+".log"))) {
             for(int j=0;j<W1.length;j++){
                 out.write("--------------------------------------------------------------");
                 out.newLine();
@@ -65,8 +69,8 @@ public class knapsack {
                 int k=1;
                 for(int i=1;i<=N;i++){
                     if(left[i][0]!=0 && left[i][1]!=0){
-                        out.write(i+"\t"+left[i][0]+"\t"+left[i][1]);
-                        out.newLine();
+                        /*out.write(i+"\t"+left[i][0]+"\t"+left[i][1]);
+                        out.newLine();*/
                         totalv1 = totalv1+left[i][0];
                         totalw1 = totalw1+left[i][1];
                         profit[k] = left[i][0];
