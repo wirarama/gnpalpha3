@@ -100,11 +100,11 @@ public class gui extends JFrame{
         txtrange.setBounds(rowfield(5,40));
         txtrange.setText("500");
         
-        lbvariation.setText("Data Variation : ");
+        lbvariation.setText("Data Variation(%) : ");
         lbvariation.setBounds(rowlabel(6));
         
         txtvariation.setBounds(rowfield(6,40));
-        txtvariation.setText("500");
+        txtvariation.setText("30");
         
         lbplot.setText("Plot : ");
         lbplot.setBounds(rowlabel(7));

@@ -20,14 +20,15 @@ public class randominput {
             int crossoverrate,
             int mutationrate
     ) throws IOException{
+        int datavariation1 = (int)((dataamount*datavariation)/100);
         int[][] data = new int[dataamount][attributeamount];
-        int[][] pattern = new int[datavariation][attributeamount];
+        int[][] pattern = new int[datavariation1][attributeamount];
         int[][] range = attrrange(attributeamount,rangeamount);
-        for(int i=0;i<datavariation;i++){
+        for(int i=0;i<datavariation1;i++){
             pattern[i] = randomrow(attributeamount,range,pattern,crossoverrate,mutationrate,(i-1));
         }
         for(int i=0;i<dataamount;i++){
-            data[i] = pattern[randomrange(0,(datavariation-1))];
+            data[i] = pattern[randomrange(0,(datavariation1-1))];
         }
         int[] patternresult = patternseeker(pattern,data,pattern[0].length);
         filelog.arraycsv(range,"0.1.range.csv",testdate);
