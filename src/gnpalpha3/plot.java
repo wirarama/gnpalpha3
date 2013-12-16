@@ -35,7 +35,7 @@ public class plot {
             ((AbstractPlot) p.getPlots().get(k)).setTitle(label[k]);
             PlotStyle stl = ((AbstractPlot) p.getPlots().get(k)).getPlotStyle();
             if("rangecoverage".equals(pngname)){
-                stl.setStyle(Style.LINESPOINTS);
+                stl.setStyle(Style.BOXERRORBARS);
             }else{
                 stl.setStyle(Style.LINES);
             }

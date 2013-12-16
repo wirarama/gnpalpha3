@@ -74,6 +74,12 @@ public class rule {
         plot.makeplot1(plot.plotstep(totalcoveragelog),"coverage","coverage","rule amount","coverage",testdate);
         plot.datarangeset(rangelogset,testdate);
         plot.makeplot1(plot.plotstep(affectedrulecoverage),"coverage","affectedcoverage","rule index","coverage",testdate);
+        //System.out.println(arraysearch.avgarray(affectedrulecoverage));
+        String[] summary = {
+            "iteration = "+ruleset.length,
+            "rule amount = "+affectedrule.length,
+            "average coverage = "+arraysearch.avgarray(affectedrulecoverage)};
+        filelog.stringlog(summary,"summary",testdate);
         return affectedrule;
     }
     public static int[][] randomrule(int attributeamount,int[][][] range){

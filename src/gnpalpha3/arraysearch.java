@@ -28,6 +28,10 @@ public class arraysearch {
         }
         return sum+1;
     }
+    public static double avgarray(int[] data){
+        double avg = (double)sumarray(data)/(double)data.length;
+        return avg;
+    }
     public static int[][] cleanarray(int[][] data,int length){
         int[][] newdata = new int[length][data[0].length];
         System.arraycopy(data, 0, newdata, 0, length);
