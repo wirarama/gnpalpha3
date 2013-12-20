@@ -14,7 +14,7 @@ import java.io.IOException;
 public class Gnpalpha3 {
     
     public static void main(String[] args) throws IOException {
-        
+        System.out.println(Runtime.getRuntime().maxMemory());
         gui mygui = new gui();
     }
 }

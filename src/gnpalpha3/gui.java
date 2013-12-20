@@ -117,6 +117,18 @@ public class gui extends JFrame{
             @Override
             public void actionPerformed(ActionEvent ae){
                 process.execute();
+                /*try {
+                    mainprocess.mainprocess(
+                            Integer.parseInt(txtattribute.getText()),
+                            Integer.parseInt(txtdata.getText()),
+                            Integer.parseInt(txtcross.getText()),
+                            Integer.parseInt(txtmutation.getText()),
+                            Integer.parseInt(txtrange.getText()),
+                            Integer.parseInt(txtvariation.getText()),
+                            chkplot.isSelected()
+                    );  } catch (IOException ex) {
+                    Logger.getLogger(gui.class.getName()).log(Level.SEVERE, null, ex);
+                }*/
             }
         });
         this.getContentPane().add(lbattribute,null);

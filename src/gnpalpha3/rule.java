@@ -32,8 +32,8 @@ public class rule {
         addedindexrule = 0;
         totalcoverage = 0;
         int[][][] ruleset = new int[ruleamount][attributeamount][3];
-        affectedrule = new int[ruleamount][attributeamount][3];
-        affectedrulecoverage = new int[ruleamount];
+        affectedrule = new int[data.length][attributeamount][3];
+        affectedrulecoverage = new int[data.length];
         int[][][] rangeset = rangeset(attributeamount,stat,data);
         int[] rulecoverage = new int[ruleamount];
         totalcoveragelog = new int[ruleamount];
@@ -44,8 +44,11 @@ public class rule {
         for(int i=0;i<ruleamount;i++){
             ruleset[i] = randomrule(attributeamount,rangeset);
             rulecoverage[i] = rulecoverage(ruleset[i],data);
+            //int[][] ruletemp = randomrule(attributeamount,rangeset);
+            //rulecoverage[i] = rulecoverage(ruletemp,data);
             if(rulecoverage[i]!=0){
                 affectedrule[j] = ruleset[i];
+                //affectedrule[j] = ruletemp;
                 affectedrulecoverage[j] = rulecoverage[i];
                 j=j+1;
             }
@@ -74,9 +77,8 @@ public class rule {
         plot.makeplot1(plot.plotstep(totalcoveragelog),"coverage","coverage","rule amount","coverage",testdate);
         plot.datarangeset(rangelogset,testdate);
         plot.makeplot1(plot.plotstep(affectedrulecoverage),"coverage","affectedcoverage","rule index","coverage",testdate);
-        //System.out.println(arraysearch.avgarray(affectedrulecoverage));
         String[] summary = {
-            "iteration = "+ruleset.length,
+            "iteration = "+totalcoveragelog.length,
             "rule amount = "+affectedrule.length,
             "average coverage = "+arraysearch.avgarray(affectedrulecoverage)};
         filelog.stringlog(summary,"summary",testdate);

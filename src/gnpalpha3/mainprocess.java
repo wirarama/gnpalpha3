@@ -30,6 +30,7 @@ public class mainprocess {
         Date date = new Date();
         String testdate = dateFormat.format(date);
         (new File("log/"+testdate+"")).mkdirs();
+        
         int[][] data = randominput.randomdb(attributeamount,dataamount,variation,testdate,range,cross,mutation);
         double[][] stat = statistics.getstatistics(data,testdate);
         int ruleamount = 1000000;
